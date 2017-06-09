@@ -1,0 +1,6 @@
+#remove procedure
+DROP PROCEDURE pname();
+
+#see all procedure 
+SHOW PROCEDURE STATUS;
+ 
