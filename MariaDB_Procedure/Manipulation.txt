@@ -1,8 +1,19 @@
 #remove procedure
 DROP PROCEDURE pname();
 
+
 #see all procedure 
 SHOW PROCEDURE STATUS;
 
+
 #see specific procedure
 SHOW CREATE PROCEDURE pname;
+
+
+#alter procedure
+ALTER PROCEDURE proc_name [characteristic ...]
+
+characteristic:
+    { CONTAINS SQL | NO SQL | READS SQL DATA | MODIFIES SQL DATA }
+  | SQL SECURITY { DEFINER | INVOKER }
+  | COMMENT 'string'
