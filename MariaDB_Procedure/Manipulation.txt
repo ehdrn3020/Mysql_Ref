@@ -3,4 +3,6 @@ DROP PROCEDURE pname();
 
 #see all procedure 
 SHOW PROCEDURE STATUS;
- 
+
+#see specific procedure
+SHOW CREATE PROCEDURE pname;
