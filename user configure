@@ -1,0 +1,23 @@
+	
+MySQL user create/grant/select/delete     
+ 
+# Create user 
+>create user 'userID'@'localhost' identified by 'password';
+'localhost' or '%' ( : Enable to Remote access)
+ 
+# Grant user 
+>grant select, insert, update, delete, create, drop, alter on DBNAME.*to 'ID'@'localhost';
+all privileges : 모든 권한 / *.* : 모든DB / with grant option : 권한위임가능
+
+# Show grants user 
+>show grants for 'ID'@'localhost(or %)';
+ 
+# Apply grant
+>flush privileges;
+
+# View all user (user table of mysql DB)
+>use mysql;
+>select user from user;
+
+# Delete user
+>drop user 'ID'@'connect area(localhost or %)';
