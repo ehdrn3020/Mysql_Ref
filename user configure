@@ -7,7 +7,9 @@ MySQL user create/grant/select/delete
  
 # Grant user 
 >grant select, insert, update, delete, create, drop, alter on DBNAME.*to 'ID'@'localhost';
-all privileges : 모든 권한 / *.* : 모든DB / with grant option : 권한위임가능
+
+# all privileges : 모든 권한 / *.* : 모든DB / with grant option : 권한위임가능
+>GRANT ALL PRIVILEGES ON shinyuser.* TO 'MyDatabase'@'%' WITH GRANT OPTION;
 
 # Show grants user 
 >show grants for 'ID'@'localhost(or %)';
