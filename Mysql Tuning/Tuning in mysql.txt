@@ -17,8 +17,8 @@ flush privileges : 권한정보 재설정
 
 
 
-###[Connection Tuning]###
 
+###[Connection Tuning]###
 
 ##[Variables]
 
@@ -32,27 +32,35 @@ Threads_connected : 현재 연결된 쓰레드 수
 Threads_created : 접속을 위해 생성된 Thread 수
 Threads_running : Sleeping 되어 있지 않은 Thread 수
 
+
 -Show Variables
 wait_timeout : 종료전까지 요청이 없이 기다리는 시간(TCP/IP 연결, Shell접속이 아닌 경우)
 thread_cache_size : 쓰레드 재사용을 위한 thread cache 수. Cache에 있는 쓰레드 수보다 접속이 많으면 새롭게 쓰레드 생성
 max_connections : 최대 동시 접속 가능 수 
 
 
-##Connection Tuning
+
+##[Connection Tuning]
+
 Cache Miss Rate(%) =  Threads_created / Connections * 100
 Connection Miss Rate(%) = Aborted_connects / Connections * 100
 Connection Usage(%) = Threads_connected / max_connections * 100
 
 -Connection Usage(%)가 100% 라면 max_connections 수를 증가시켜 주십시요. Connection 수가 부족할 경우 Too Many Connection Error 가 발생합니다.
+
 -DB 서버의 접속이 많은 경우는 wait_timeout 을 최대한 적게 (10~20 정도를 추천) 설정하여 불필요한 연결을 빨리 정리하는 것이 좋습니다. 
  그러나 Connection Miss Rate(%) 가 1% 이상이 된다면 wait_timeout 을 좀 더 길게 잡는 것이 좋습니다.
+
 -Cache Miss Rate(%) 가 높다면 thread_cache_size를 기본값인 8 보다 높게 설정하는 것이 좋습니다. 일반적으로 threads_connected 가 Peak-time 시 보다 약간 낮은 수치로 설정하는 것이 좋습니다.
+
 -MySQL 서버는 외부로 부터 접속 요청을 받을 경우 인증을 위해 IP 주소를 호스트네임으로 바꾸는 과정을 수행하여 접속시에 불필요한 부하가 발생하게 됩니다. 
  skip-name-resolve를 설정하시고 접속시에 IP 기반으로 접속을 하게 되면 hostname lookup 과정을 생략하게 되어 좀 더 빠르게 접속을 하실 수 있습니다.
 
 
 
-###[Memory Tuning]
+
+###[Memory Tuning]###
+
 
 ##[Variables]
 
@@ -73,14 +81,16 @@ tmp_table_size : group by시 디스크를 사용하지 않고 임시 테이블�
 key_cache_block_size : block의 크기(bytes, 기본 1024)
 
 
-#Memory Tuning
+
+#[Memory Tuning]
+
 Key Buffer Usage = 1 – ((Key_blocks_unused × key_cache_block_size) / key_buffer_size)
 Key_reads/Key_read_requests Rate(%) =  Key_reads/Key_read_requests * 100
 Key_reads/Key_read_requests Relative Rate(%) = (1- ^Key_reads/^Key_read_requests) * 100
 ^Key_Reads = Current Key_Rreads – Previous Key_Reads
 
-
 -key_buffer_size는 총 메모리 크기의 25% 정도의 크기로 설정하는 것이 좋다.
+
 -Key_reads/Key_read_requests Rate(%)은 일반적으로 1%보다 적다. 1% 보다 높다면 Key Cache가 아닌 디스크를 읽은 경우가 많다고 판단할 수 있다. 
  또한 Key_reads/Key_reads_requests Relative Rate(%) 값이 지속적으로 90% 이상일 경우는 key_buffer_size가 효율적으로 설정되어 있다고 생각하시면 됩니다. 
  하지만 데이터베이스가 엄청나게 크거나 여러 데이터를 골고루 많이 읽는 데이터베이스라면 아무리 많은 양의 키 캐시를 설정해도 90% 이상의 적중률을 얻을 수는 없다.
