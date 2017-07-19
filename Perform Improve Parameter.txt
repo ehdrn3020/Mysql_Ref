@@ -1,0 +1,30 @@
+RAMSize 	MySQL Parameters For			MySQL Parameters For
+		Windows Installation			Linux Installation
+
+512MB		Default configuration 			Default configuration
+		as given in startDB.bat			as given in startDB.sh
+
+1 GB		--innodb_buffer_pool_size=300M		--innodb_buffer_pool_size=300M
+		--key-buffer-size=150M			--key_buffer_size=150M
+		--max_heap_table_size=150M		--max_heap_table_size=150M
+		--tmp_table_size=100M			--tmp_table_size=100M
+		--table-cache=512			--table-cache=512
+
+2 GB		--innodb_buffer_pool_size=900M		--innodb_buffer_pool_size=900M
+		--key-buffer-size=600M			--key_buffer_size=600M
+		--max_heap_table_size=350M		--max_heap_table_size=350M
+		--tmp_table_size=100M			--tmp_table_size=100M
+		--table-cache=512			--table-cache=512
+
+3 GB		--innodb_buffer_pool_size=900M		--innodb_buffer_pool_size=1400M
+		--key-buffer-size=600M			--key_buffer_size=1000M
+		--max_heap_table_size=350M		--max_heap_table_size=350M
+		--tmp_table_size=100M			--tmp_table_size=100M
+		--table-cache=512			--table-cache=512
+	
+
+4 GB		--innodb_buffer_pool_size=900M		--innodb_buffer_pool_size=1800M
+		--key-buffer-size=600M			--key_buffer_size=1200M
+		--max_heap_table_size=350M		--max_heap_table_size=350M
+		--tmp_table_size=100M			--tmp_table_size=100M
+		--table-cache=512			--table-cache=512
