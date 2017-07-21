@@ -3,6 +3,7 @@
 
 
 ##innodb_buffer_pool_size
+
 default : 8M
 InnoDB는 별도의 데이타를 위한 읽기 쓰기 버퍼 메모리를 가지고 있다.
 index 및 raw data Cache 용 Memory Size를 의미하며 Maximum Size는 Real Memory의 80%까지 정의 가능하다.  
