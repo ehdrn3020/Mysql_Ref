@@ -1,7 +1,17 @@
 # Variables
 >show variables 
+
+
+##innodb_buffer_pool_size
+default : 8M
+InnoDB는 별도의 데이타를 위한 읽기 쓰기 버퍼 메모리를 가지고 있다.
+index 및 raw data Cache 용 Memory Size를 의미하며 Maximum Size는 Real Memory의 80%까지 정의 가능하다.  
+하지만, Memory Paging을 최소화 할 수 있는 Size가 적당하다. 참고로 Oracle의 권고 SGA Size는 Real Memory의 50%이다. 
+32 Bit O/S의 경우 Addressing 특성 상 Maximum 4G이다.
+
  
-#innodb_flush_log_at_trx_commit
+
+##innodb_flush_log_at_trx_commit
 
 Commit 시 Commit Log를 Log File에 어떻게 기록할지를 지정한다.
 [0] Log Buffer가 꽉 차거나 Flush Log가 발생할때 Log File에 기록. 서버 비정상과 같은 상황에서 데이터를 잃어버릴 수 있다.
@@ -10,9 +20,33 @@ Commit 시 Commit Log를 Log File에 어떻게 기록할지를 지정한다.
 
 
 
-innodb_log_file_size
-innodb_flush_log_at_trx_commit
-innodb_flush_method
-log_bin and sync_binlog
+##innodb_flush_method
+
+Disk I/O Buffer의 사용 여부.
+일 반적으로 Disk I/O가 발생하면 그 즉시 Disk에 반영되지 않고 Memory에 Caching되었다가 일정 Size이상이 되면 그 때 Disk에 Physically 반영되는데, 
+이러한 과정 없이 즉시로 Disk에 반영 시키는 Option이다.
+[fdatasync] : Default
+[O_DIRECT] : Cache Write 시 Disk에도 동일하게 반영 시킨다.
+[O_DSYNC] : 로그 파일을 읽고 쓸 때는 O_SYNC를 사용하고 데이터 파일을 읽고 쓸 때는 fsync()를 사용한다.
+Ref http://www.mimul.com/pebble/default/2012/05/25/1337938684138.html
+
+
+
+##innodb_log_file_size
+
+트랜잭션을 기록하는 로그 파일의 크기를 결정하는 옵션으로  로그파일은 무한정 계속 커지는 것이 아니라 일정한 크기와 갯수를 가지고 순환식으로 처리된다.
+보통 일반적으로 innodb_buffer_pool_size 의 15% 정도로 설정한다.
+만약 메모리가 1GB이면 innodb_buffer_pool_size = 512M 이고, innodb_log_file_size = 80M 이다.
+
+
+
+##nnodb_log_buffer_size 
+
+위에서 말한 로그 파일을 기록하기 위한 버퍼 사이즈입니다. 커다란 트랜잭션을 처리할 경우 크게 잡아주는 것이 좋지만 
+트랜잭션이작거나 거의 없다면 크게 잡는 것은 낭비입니다. 
+보통 1M-8M 사이로 설정한다. 
+
+
+##log_bin and sync_binlog
 
 
