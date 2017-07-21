@@ -1,0 +1,9 @@
+###solve have_innodb : YES
+#if you change variables concerning buffer/size innodb, sometimes couldn't apply to innodb engine.
+
+/etc/init.d/mysqld stop
+mv /var/lib/mysql/ib_logfile0 /var/lib/mysql/ib_logfile0.bak
+mv /var/lib/mysql/ib_logfile1 /var/lib/mysql/ib_logfile1.bak
+
+/etc/init.d/mysqld start
+
