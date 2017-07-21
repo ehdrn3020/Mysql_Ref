@@ -3,16 +3,13 @@
  
 #innodb_flush_log_at_trx_commit
 
-0: INSERT 할 때에 로그 파일에 기록하지 않기 때문에 INSERT 속도가 향상된다. 
-   단, 서버 비정상 종료 또는 정전과 같은 상황에서 INSERT 한 데이터를 잃어버릴 수 있다.
-1: Default. INSERT 시에 데이터를 로그파일에 저장. 
-2: log file을 기록할때 초당 기록하게하여 Insert 속도 및 데이타 손실을 대비해서 어느정도 보장.
 Commit 시 Commit Log를 Log File에 어떻게 기록할지를 지정한다.
 [0] Log Buffer가 꽉 차거나 Flush Log가 발생할때 Log File에 기록. 서버 비정상과 같은 상황에서 데이터를 잃어버릴 수 있다.
 [1] Commit이 발생할 때 마다 Log File에 기록(Default)
 [2] 1초마다 Log File에 기록. 어느정도 데이터손실을 보장.
 
-출처: http://linuxism.tistory.com/1506 [linuxism]
+
+
 innodb_log_file_size
 innodb_flush_log_at_trx_commit
 innodb_flush_method
