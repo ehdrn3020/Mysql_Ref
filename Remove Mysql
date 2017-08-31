@@ -1,0 +1,18 @@
+###Remove Mysql###
+
+$ sudo apt-get purge mysql-server
+
+$ sudo apt-get purge mysql-common
+
+$ sudo rm -rf /var/log/mysql
+
+$ sudo rm -rf /var/log/mysql.*
+
+$ sudo rm -rf /var/lib/mysql
+
+$ sudo rm -rf /etc/mysql
+
+
+
+$ sudo apt-get install mysql-server --fix-missing --fix-broken 
+
