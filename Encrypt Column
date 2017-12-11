@@ -1,0 +1,9 @@
+
+
+암호화
+INSERT INTO 테이블명 (필드명) VALUES (HEX(AES_ENCRYPT('문자열', '암호화 키')));
+
+복호화
+SELECT AES_DECRYPT(UNHEX(필드명), '암호화 키') FROM 테이블명;
+
+출처: http://sopie2000.tistory.com/10 [Nothing can be done without efforts.]
