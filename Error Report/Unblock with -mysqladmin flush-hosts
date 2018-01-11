@@ -1,0 +1,31 @@
+###ERROR 1129 (00000): Host 'xx' is blocked because of many connection errors.  Unblock with 'mysqladmin flush-hosts'###
+
+너무 많은 연결오류로 인하여 호스트 '192.168.1.1'는 블락되었습니다. 'mysqladmin flush-hosts'를 이용하여 블락을 해제하세요
+
+MySQL Server가 동작중인지 원격에서 검사할 때 유의할 점이다.
+원격 서버의 MySQL 3306 포트가 살아있는지 검사할 때 단순히 커넥션을 한 후 close하게 되면
+MySQL은 비정상적인 접속으로 판단하여 해당 IP를 블럭킹할 수 있다.
+ 
+MySQL은 비정상적인 접속에 대한 요청수를 카운트를 하는데 max_connect_errors 변수에서 지정한 값을
+넘으면 블럭킹을 한다. 기본 값은 10이며, 정기적인 포트 점검이 필요한 경우 이 수를 높여라.
+
+
+Solution 1) Flush host sessions
+In Linux root
+[root ~]# mysqladmin flush-hosts  -uroot -p
+Enter password:
+
+
+Solution 2)Extend connect Value
+max_connect_errors 값을 늘려서 해결해야 할것 같다.
+
+
+Add)
+추가내용
+DNS나 네트워크가 불안할 경우 발생할 수 있다고 합니다.
+우발적인 커넥션 단절을 막기 위해 max_connect_errors 값을 충분히 늘려주고,  
+my.cnf(my.ini)에 skip_name_resolve을 활성화하여 호스트기반이 아닌 IP기반으로 사용
+
+
+출처: http://choiwy.tistory.com/653 [개발자 노트]
+
