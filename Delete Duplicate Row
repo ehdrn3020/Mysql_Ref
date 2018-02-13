@@ -1,0 +1,12 @@
+DELETE FROM duplicate
+WHERE id not in ( SELECT id from ( SELECT id from duplicate group by phone) as id )
+
+
+전화번호가 중복 된 것이 있을 경우, 위와 같이 WHERE NOT IN을 사용해 제거. 
+duplicate - 테이블명 
+phone - 중복되는 칼럼명 
+id - 각 레코드를 식별할 수 있는 고유 값
+
+
+
+출처: http://hyuckiii.tistory.com/42 [루달푸]
